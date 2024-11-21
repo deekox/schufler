@@ -17,6 +17,8 @@ class Note:
         "low E on guitar"
         self.value = 0
 
+def getNote(string, note):
+    return (tune[string] + note) % 12
 
 def getNoteName(value, isSharp):
     if value < 0:
@@ -51,16 +53,30 @@ def getFret(note, string):
     print(f"fret: {fret}")
 
 
-
-
-for s in range(6):
-    print(f"string: {getNoteName(tune[s], True)}")
-    for n in range(14):
-        print(f"fret: {n}, note: {getNoteName(tune[s] + n, True)}")
-
+def drawNeck(string, fret):
     drawHeader()
-    for a in range(12):
-        drawString(a)
+    for s in range(6):
+        if s == string:
+            drawString(fret)
+        else:
+            drawString(-1)
+
+
+
+while True:
+
+    fret = random.randrange(4)
+    string = random.randrange(6)
+    note = getNote(string, fret)
+    noteName = getNoteName(note, True)
+    
+    drawNeck(string, fret)
+    input()
+    print(noteName)
+    input()
+
+
+
     # drawString(1, 2)
 
     # val = random.randrange(100)
